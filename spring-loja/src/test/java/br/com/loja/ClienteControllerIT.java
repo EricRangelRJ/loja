@@ -1,31 +1,29 @@
 package br.com.loja;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpStatus;
 
-import br.com.loja.entities.Cliente;
-import br.com.loja.services.ClienteService;
-import br.com.loja.utils.DateUtils;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 
-@SpringBootTest
+
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) // Sobe a aplicação em uma porta aleatória
 class ClienteControllerIT {
-
-	@Autowired
-	private ClienteService service;
+	@LocalServerPort
+	private int port;
 
 	@Test()
-	void cadastrarClienteComSucesso() {
-		// preparação
-		Cliente cliente = new Cliente();
-		cliente.setCpf("8888888888");
-		cliente.setNome("houahouaho haouhaouhaou");
-		cliente.setDataNascimento(DateUtils.toDate(null, "dd/MM/yyyy"));
-		cliente.setEmail("emailTeste@teste.com");
-
-		// ação
-
-		// validações
+	void deveRetornarStatus403_QuandoConsultarClientes() {
+		RestAssured.given()
+			.basePath("/api/clientes")
+			.port(port)
+			.accept(ContentType.JSON)
+		.when()
+			.get()
+		.then()
+			.statusCode(HttpStatus.FORBIDDEN.value());
 	}
 
 }
