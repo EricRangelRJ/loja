@@ -9,7 +9,7 @@ import br.com.loja.services.ClienteService;
 import br.com.loja.utils.DateUtils;
 
 @SpringBootTest
-class SpringLojaApplicationTests {
+class ClienteControllerIT {
 
 	@Autowired
 	private ClienteService service;
