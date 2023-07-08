@@ -4,74 +4,56 @@
   <mat-drawer #drawer opened="true" class="sidenav" mode="side">
 
     <!--Início da Listagem do Menu-->
-    <img src="assets/imagens/loja.png" alt="Imagem de navegação">
+    <img src="assets/imagens/alho.png" alt="Imagem de navegação">
     <mat-nav-list>
       <br>
       <a mat-list-item routerLink="home">
-        <span class="t">
           <i class="material-icons">home</i>
           Home
-        </span>
       </a>
       <br>
 
       <a mat-list-item routerLink="usuarios-lista">
-        <span class="t">
           <i class="material-icons">account_circle</i>
           Usuários
-        </span>
       </a>
 
       <a mat-list-item routerLink="clientes">
-        <span class="t">
           <i class="material-icons">person</i>
           Clientes
-        </span>
       </a>
 
       <a mat-list-item routerLink="fornecedores">
-        <span class="t">
           <i class="material-icons">folder_shared</i>
           Fornecedores
-        </span>
       </a>
 
       <a mat-list-item routerLink="vendedores-lista">
-        <span class="t">
           <i class="material-icons">person</i>
           Vendedores
-        </span>
       </a>
 
       <a mat-list-item routerLink="produtos">
-        <span class="t">
           <i class="material-icons">important_devices</i>
           Produtos
-        </span>
       </a>
 
       <a mat-list-item routerLink="pedidos">
-        <span class="t">
           <i class="material-icons">credit_card</i>
           Pedidos
-        </span>
       </a>
 
       <a mat-list-item routerLink="relatorios">
-        <span class="t">
           <i class="material-icons">print</i>
           Relatórios
-        </span>
       </a>
 
       <br />
       <br />
 
       <a mat-list-item (click)="openDialog('0ms', '0ms')">
-        <span class="t">
           <i class="material-icons">logout</i>
           Sair
-        </span>
       </a>
 
       <mat-list-item [ngSwitch]="usuario.perfil">
@@ -85,23 +67,14 @@
   </mat-drawer>
 
   <!--Lado direito da tela-->
-  <mat-drawer-content>
-
-    <!--Inserção do cabeçalho (HEADER)-->
-    <app-header></app-header>
-
-    <!-- Inserção do botão Exibir/ocultar o NAV-->
-    <button class="menu mat-elevation-z8" (click)="drawer.toggle()" mat-icon-button>
-      <mat-icon title="Menu Principal">menu</mat-icon>
-    </button>
-
-    <!--Roteando os SubMenus. Exibe os componentes-->
-    <main class="sidenav-content">
+    <div class="sidenav-content">
+      <!--Inserção do Header-->
+      <app-header></app-header>
+      <button class="menu mat-elevation-z8" (click)="drawer.toggle()" mat-icon-button>
+        <mat-icon title="Menu Principal">menu</mat-icon>
+      </button>
+      <!--Roteando os SubMenus-->
       <router-outlet></router-outlet>
-    </main>
-
-    <!--Inserção do rodapé (FOOTER)-->
-    <app-footer></app-footer>
-
-  </mat-drawer-content>
-</mat-drawer-container>
+    </div>
+  </mat-drawer-container>
+ 
