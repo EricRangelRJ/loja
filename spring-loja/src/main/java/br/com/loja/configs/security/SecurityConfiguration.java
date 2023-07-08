@@ -52,7 +52,8 @@ public class SecurityConfiguration {
         //PERMITIR PROVISORIAMENTE PARA TESTES
 	//	.requestMatchers(TESTES).permitAll()
 
-		
+        //liberando todos os acessos
+		.requestMatchers("**").permitAll()
 		// permitir o cadastro de usuário
 		.requestMatchers("/api/usuarios/**").permitAll()
 		// permitir autenticação do usuário
