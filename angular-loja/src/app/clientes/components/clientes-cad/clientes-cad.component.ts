@@ -52,14 +52,14 @@ export class ClientesCadComponent implements OnInit {
 
   dados = this._formBuilder.group({
 
-    nome: ['Teste teste',
+    nome: [null,
       //torna o campo obrigatório
-      [Validators.required,
+      [//Validators.nullValidator,
       //Regex para duas strings, separadas com espaço e com no mínimo 3 caracteres cada. Aceita acentuação e rejeita números.
-      Validators.pattern(/\b[A-Za-zÀ-ú][A-Za-zÀ-ú]+,?\s[A-Za-zÀ-ú][A-Za-zÀ-ú]{2,19}\b/)
+      //Validators.pattern(/\b[A-Za-zÀ-ú][A-Za-zÀ-ú]+,?\s[A-Za-zÀ-ú][A-Za-zÀ-ú]{2,19}\b/)
       ]
     ],
-    cpf: ['12341233302',
+    cpf: [null,
       [Validators.required, Validators.minLength(11),
       Validators.pattern('^[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}$')
       ]
@@ -68,8 +68,8 @@ export class ClientesCadComponent implements OnInit {
   });
 
   contatos  = this._formBuilder.group({
-    telefone1: ['26977022',
-      [Validators.required,
+    telefone1: [null,
+      [Validators.nullValidator,
       Validators.pattern (/^[0-9]{8,11}$/),
      // Validators.pattern (/^\(?\d{2}\)?[\s-]?\d{5}-?\d{4}$/),
 

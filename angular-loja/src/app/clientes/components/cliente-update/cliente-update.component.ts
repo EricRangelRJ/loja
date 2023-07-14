@@ -68,9 +68,9 @@ export class ClienteUpdateComponent implements OnInit {
   dados = this._formBuilder.group({
     nome: ['',
       //torna o campo obrigatório
-      [Validators.required,
+      [//Validators.required,
       //Regex para duas strings, separadas com espaço e com no mínimo 3 caracteres cada. Aceita acentuação e rejeita números.
-      Validators.pattern(/\b[A-Za-zÀ-ú][A-Za-zÀ-ú]+,?\s[A-Za-zÀ-ú][A-Za-zÀ-ú]{2,19}\b/),
+      //Validators.pattern(/\b[A-Za-zÀ-ú][A-Za-zÀ-ú]+,?\s[A-Za-zÀ-ú][A-Za-zÀ-ú]{2,19}\b/),
       ]
     ],
     dataNascimento: ['',[]], /*IMPORTANTE: NECESSÁRIO VALIDAR A DATA  */
