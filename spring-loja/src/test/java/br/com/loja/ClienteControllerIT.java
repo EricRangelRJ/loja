@@ -1,5 +1,6 @@
 package br.com.loja;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,11 @@ import org.springframework.http.HttpStatus;
 
 import br.com.loja.dtos.auth.AuthGetDTO;
 import br.com.loja.dtos.auth.AuthPostDTO;
+import br.com.loja.dtos.usuario.UsuarioGetDTO;
 import br.com.loja.dtos.usuario.UsuarioPostDTO;
 import br.com.loja.services.AuthService;
 import br.com.loja.services.UsuarioService;
+import br.com.loja.utils.ClienteTestUtils;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
@@ -33,12 +36,19 @@ class ClienteControllerIT {
 	private final String SENHA_TESTE = "teste";
 
 	private String accessToken;
+	private UsuarioGetDTO usr;
 
 	@BeforeEach
 	public void setUp() {
+		this.usr = cadastrarUsr();
 		RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
 		RestAssured.port = port;
 		RestAssured.basePath = "/api/clientes";
+	}
+	
+	@AfterEach
+	public void setDown() {
+		usuarioService.excluir(this.usr.getIdUsuario());
 	}
 
 	
@@ -63,14 +73,31 @@ class ClienteControllerIT {
 		.then()
 			.statusCode(HttpStatus.OK.value());
 	}
+
+	@Test
+	void deveRetornarStatus201_QuandoCadastrarClientes(){
+		getAccessToken();
+		given()
+			.header("Authorization", "Bearer "+accessToken)
+			.contentType(ContentType.MULTIPART)
+			.multiPart("dadosCliente",ClienteTestUtils.montaClienteCadastro())
+		.when()
+			.post()
+		.then()
+			.statusCode(HttpStatus.CREATED.value());
+		
+	}
 	
-	private void getAccessToken() {
+	private UsuarioGetDTO cadastrarUsr() {
 		UsuarioPostDTO usr = new UsuarioPostDTO();
 		usr.setEmail(EMAIL_TESTE);
 		usr.setNome("teste");
 		usr.setSenha(SENHA_TESTE);
 	
-		usuarioService.cadastrar(usr);
+		return usuarioService.cadastrar(usr);
+	}
+	
+	private void getAccessToken() {
 		AuthPostDTO auth = new AuthPostDTO();
 		auth.setEmail(EMAIL_TESTE);
 		auth.setSenha(SENHA_TESTE);
