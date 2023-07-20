@@ -1,17 +1,22 @@
 package testes;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import pages.LoginPage;
+import util.windowcommands.SystemUtil;
 
 public class TesteLogin {
 	
-	private static final String URL = "http://alhofacil.shop";
+	private static final String URL = "http://www.alhofacil.shop";
 	private static final String TITULO_DA_PAGINA = "MinhaLoja";
 	private static final String EMAIL = "eric@gmail.com";
 	private static final String SENHA = "1234";
@@ -22,8 +27,9 @@ public class TesteLogin {
 
 	@Before
 	public void inicializa() {
-		driver = buildChromeDriver();
-		System.setProperty("webdriver.chrome.driver", "C:chromedriver.exe");
+		System.setProperty("webdriver.gecko.driver", "C:\\webdriver\\geckodriver.exe");
+		driver = new FirefoxDriver();
+		driver.manage().window().setSize(new Dimension(1200, 765));
 		loginPage = new LoginPage(driver);
 		
 		
@@ -31,15 +37,17 @@ public class TesteLogin {
 	
 	@After
 	public void finaliza(){
-//		driver.quit();
+		SystemUtil.fecharFirefox();
 	}
 	
-//	@Test
-//	public void deveRealizarLogin() {
-//		driver.get(URL);
-//		loginPage.setEmail(EMAIL);
-//		loginPage.setSenha(SENHA);
-//	}
+	@Test
+	public void deveRealizarLogin() {
+		driver.get(URL);
+		loginPage.setEmail(EMAIL);
+		loginPage.setSenha(SENHA);
+		loginPage.acionarBotaoEntrar("/html/body/app-root/app-login/div/form/button");
+		assertEquals(loginPage.resgataTituloPagina(), TITULO_DA_PAGINA);
+	}
 	
 	private WebDriver buildChromeDriver() {
 		ChromeOptions options = new ChromeOptions();

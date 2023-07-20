@@ -20,4 +20,12 @@ public class LoginPage {
 		dsl.escrever("mat-input-1", senha);
 	}
 	
+	public void acionarBotaoEntrar(String XPath) {
+		dsl.clicarBotaoByXpath(XPath);
+	}
+	
+	public String resgataTituloPagina() {
+		return dsl.obterTituloPagina();
+	}
+	
 }

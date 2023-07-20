@@ -2,6 +2,7 @@ package dsl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.By.ByXPath;
@@ -116,8 +117,8 @@ public class DSL {
 		driver.findElement(By.id(id)).click();
 	}
 	
-	public void clicarBotaoByXpath(ByXPath xpath) {
-		driver.findElement(xpath);
+	public void clicarBotaoByXpath(String xPath) {
+		driver.findElement(By.xpath(xPath)).click();
 	}
 	
 	public String obterValueElemento(String id) {
@@ -181,6 +182,10 @@ public class DSL {
 	
 	public void trocarJanela(String id) {
 		driver.switchTo().window(id);
+	}
+	
+	public String obterTituloPagina() {
+		return driver.getTitle();
 	}
 	
 	/************** JS *********************/
