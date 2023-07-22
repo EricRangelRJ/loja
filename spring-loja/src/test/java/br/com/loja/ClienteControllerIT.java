@@ -1,5 +1,9 @@
 package br.com.loja;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -75,7 +79,7 @@ class ClienteControllerIT {
 	}
 
 	@Test
-	void deveRetornarStatus201_QuandoCadastrarClientes(){
+	void deveCadastrarClientes(){
 		getAccessToken();
 		given()
 			.header("Authorization", "Bearer "+accessToken)
@@ -84,7 +88,12 @@ class ClienteControllerIT {
 		.when()
 			.post()
 		.then()
-			.statusCode(HttpStatus.CREATED.value());
+			.statusCode(HttpStatus.CREATED.value())
+			.contentType(ContentType.JSON)
+			.body("idCliente", is(notNullValue()))
+			.body("email", equalTo("emailteste@gmail.com"))
+			.body("cpf", equalTo("12341233302"));
+		//TODO Verificar a necessidade de validação de todos os campos
 		
 	}
 	
