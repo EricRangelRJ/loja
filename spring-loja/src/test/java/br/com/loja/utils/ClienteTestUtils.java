@@ -23,7 +23,3 @@ public class ClienteTestUtils {
             .toString();
     }
 }
-
-// {"nome":"Teste teste","cpf":"12341233302","dataNascimento":"2023-07-18T03:00:00.000Z","telefone1":"26977022","telefone2":"11111111111",
-//"email":"teste@teste.com","logradouro":"Passagem Vinte e Cinco de Dezembro","numero":23,"complemento":null,"condominio":null,"bairro":"Curió-Utinga",
-//"municipio":"Belém","estado":"PA","cep":"66610130","observacao":"ewew"}
