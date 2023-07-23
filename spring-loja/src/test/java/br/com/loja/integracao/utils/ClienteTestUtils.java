@@ -1,4 +1,4 @@
-package br.com.loja.utils;
+package br.com.loja.integracao.utils;
 
 public class ClienteTestUtils {
     public static String montaClienteCadastro() {

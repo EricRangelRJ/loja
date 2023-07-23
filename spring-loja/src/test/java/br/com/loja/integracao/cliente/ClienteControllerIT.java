@@ -1,4 +1,4 @@
-package br.com.loja;
+package br.com.loja.integracao.cliente;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -16,9 +16,9 @@ import br.com.loja.dtos.auth.AuthGetDTO;
 import br.com.loja.dtos.auth.AuthPostDTO;
 import br.com.loja.dtos.usuario.UsuarioGetDTO;
 import br.com.loja.dtos.usuario.UsuarioPostDTO;
+import br.com.loja.integracao.utils.ClienteTestUtils;
 import br.com.loja.services.AuthService;
 import br.com.loja.services.UsuarioService;
-import br.com.loja.utils.ClienteTestUtils;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
@@ -67,7 +67,7 @@ class ClienteControllerIT {
 	}
 
 	@Test()
-	void deveRetornarStatus200_QuandoConsultarClientes() {
+	void deveConsultarClientes() {
 		getAccessToken();
 		given()
 			.header("Authorization", "Bearer "+accessToken)
@@ -75,7 +75,8 @@ class ClienteControllerIT {
 		.when()
 			.get()
 		.then()
-			.statusCode(HttpStatus.OK.value());
+			.statusCode(HttpStatus.OK.value())
+			.contentType(ContentType.JSON);
 	}
 
 	@Test
